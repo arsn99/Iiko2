@@ -1,0 +1,26 @@
+ { 
+     "reportType": "SALES",
+ "groupByColFields":["Mounth"],
+ "aggregateFields":["ProductCostBase.ProductCost","DishDiscountSumInt","ProductCostBase.Percent"],
+
+   "filters": 
+   {
+        "OpenDate.Typed": 
+        { 
+            "filterType": "DateRange",
+             "periodType": "CUSTOM",
+              "from": "2020-08-20",
+               "to": "2020-08-20",
+                "includeLow": true,
+                 "includeHigh": true 
+        },
+		 "DeletedWithWriteoff":
+        {
+            "filterType": "IncludeValues",
+            "values":["NOT_DELETED"]
+			
+        }
+
+
+    }
+ }

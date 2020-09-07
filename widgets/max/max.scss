@@ -1,0 +1,37 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #9c4274;
+
+$title-color:       rgba(255, 255, 255, 0.7);
+$moreinfo-color:    rgba(255, 255, 255, 0.3);
+
+$max-background:  darken($background-color, 15%);
+
+// ----------------------------------------------------------------------------
+// Widget-max styles
+// ----------------------------------------------------------------------------
+.widget-max {
+
+  background-color: $background-color;
+
+  input.max {
+    background-color: $max-background;
+    color: #fff;
+  }
+
+  .title {
+  font-size: 40pt;
+  font-family:monospace  ;
+    color: $title-color;
+  }
+
+  .more-info {
+    color: $moreinfo-color;
+  }
+
+  .updated-at {
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+}

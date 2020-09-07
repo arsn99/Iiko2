@@ -1,0 +1,66 @@
+<% content_for :title do %>Аналитические отчеты<% end %>
+<div class="gridster">
+  <ul>
+
+    <!--<li data-row="1" data-col="1" data-sizex="2" data-sizey="1">-->
+      <!--<div data-id="month_requests" data-view="Graph" data-title="Пришло по месяцам" data-moreinfo = 'В этом месяце' style="background-color:#96bf48"></div>-->
+    <!--</li>-->
+
+    <!--<li data-row="1" data-col="1" data-sizex="2" data-sizey="1">-->
+      <!--<div data-id="month_c_requests" data-view="Graph" data-title="Закрыто по месяцам" data-moreinfo = 'В этом месяце' style="background-color:#dc5945"></div>-->
+    <!--</li>-->
+
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="month_co_requests" data-view="Rickshawgraph" data-renderer="bar" data-unstack="true" data-colors="#ae6314:#df8117" data-legend="true" data-title="Заявки по месяцам" style="background-color:#ff9618"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="top_r_cat" data-view="List" data-unordered="false" data-title="Топ по категориям" data-moreinfo=" "></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="agent_status" data-view="Meter" data-title="На обслуживании" data-min="0" data-max="100"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="uniq_obj_total_obj" data-view="Meter" data-title="Уникальных в этом месяце" data-min="0" data-max="100"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="r_after_18" data-view="Number" data-title="Заявок с 18 до 9" style="background-color:#7b5fc7;"></div>
+    </li>
+
+    <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="r_type" data-view="Pie" data-title="По типам заявок"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="top_p_month" data-view="List" data-unordered="false" data-title="Топ за предыдущий месяц" data-moreinfo=" "></div>
+    </li>
+	
+	    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="in_call_user_day" data-view="List" data-unordered="false" data-title="Входящие за день" data-moreinfo=" "></div>
+    </li>
+	
+	    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="out_call_user_day" data-view="List" data-unordered="false" data-title="Исходящие за день" data-moreinfo=" "></div>
+    </li>
+
+	    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="in_call_user_mounth" data-view="List" data-unordered="false" data-title="Входящие за месяц" data-moreinfo=" "></div>
+    </li>
+	
+	    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="out_call_user_mounth" data-view="List" data-unordered="false" data-title="Исходящие за месяц" data-moreinfo=" "></div>
+    </li>
+	
+		    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="in_call_duty" data-view="List" data-unordered="false" data-title="Принятые на дежурные номера" data-moreinfo=" "></div>
+    </li>
+	
+    <!--<li data-row="1" data-col="1" data-sizex="2" data-sizey="1">-->
+      <!--<div data-id="r_type2" data-view="GooglePie"  data-title="По типам заявок 2"></div>-->
+    <!--</li>-->
+
+  </ul>
+</div>

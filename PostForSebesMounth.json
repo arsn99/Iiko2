@@ -1,0 +1,26 @@
+ { 
+     "reportType": "SALES",
+ "groupByColFields":["Mounth"],
+ "aggregateFields":["ProductCostBase.ProductCost"],
+
+   "filters": 
+   {
+        "OpenDate.Typed": 
+        { 
+            "filterType": "DateRange",
+             "periodType": "CUSTOM",
+              "from": "2018-06-20",
+               "to": "2021-06-21",
+                "includeLow": true,
+                 "includeHigh": true 
+        },
+		 "DeletedWithWriteoff":
+        {
+            "filterType": "IncludeValues",
+            "values":["NOT_DELETED"]
+			
+        }
+
+
+    }
+ }

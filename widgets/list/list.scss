@@ -1,0 +1,90 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #12b0c5;
+$value-color:       #fff;
+
+$title-color:       rgba(255, 255, 255, 0.7);
+$label-color:       rgba(255, 255, 255, 0.7);
+$moreinfo-color:    rgba(255, 255, 255, 0.7);
+$title-position:    top;
+// ----------------------------------------------------------------------------
+// Widget-list styles
+// ----------------------------------------------------------------------------
+.widget-list {
+
+  background-color: $background-color;
+  vertical-align: top;
+
+  .title {
+  margin:10px;
+    color: $title-color;
+	font-size: 22pt;
+  
+    @if $title-position == 'top' {
+      left: 0;
+      right: 0;
+      top: -10px;
+      position: absolute;
+    }
+    @else {
+      position: relative;
+    }
+  }
+
+  ol, ul {
+    margin:10px;
+    text-align: left;
+    color: $label-color;
+	 left: 0;
+      right: 0;
+      top: 80px;
+	  
+      position: absolute;
+	  font-size: 15pt;
+	font-family:sans-serif 
+  }
+
+  ol {
+	
+    list-style-position: inside;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
+
+  .list-nostyle {
+    list-style: none;
+  }
+
+  .label {
+    color: lighten($title-color, 10%);
+	font-weight: 400;
+	
+  }
+
+  .value {
+    float: right;	
+    font-weight: 700;
+    color: $value-color;
+  }
+
+  .updated-at {
+    color: rgba(0, 0, 0, 0.1);
+  }
+
+  .more-sum {
+  	 left: 0;
+      right: 0;
+      bottom: 50px;
+      
+      position: absolute;
+    color: $moreinfo-color;
+  }
+  .more-info {
+  
+    color: $moreinfo-color;
+  }
+
+}

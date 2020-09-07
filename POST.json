@@ -1,0 +1,20 @@
+ { 
+     "reportType": "SALES",
+ "groupByColFields":["OpenDate.Typed"],
+ "aggregateFields":["DishDiscountSumInt"],
+
+   "filters": 
+   {
+        "OpenDate.Typed": 
+        { 
+            "filterType": "DateRange",
+             "periodType": "CUSTOM",
+              "from": "2020-03-13",
+               "to": "2021-08-13",
+                "includeLow": true,
+                 "includeHigh": true 
+        }
+
+
+    }
+ }

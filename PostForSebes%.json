@@ -1,0 +1,26 @@
+ { 
+     "reportType": "SALES",
+ "groupByColFields":["OpenDate.Typed"],
+ "aggregateFields":["ProductCostBase.Percent"],
+
+   "filters": 
+   {
+        "OpenDate.Typed": 
+        { 
+            "filterType": "DateRange",
+             "periodType": "CUSTOM",
+              "from": "2018-03-14",
+               "to": "2020-08-16",
+                "includeLow": true,
+                 "includeHigh": true 
+        },
+		 "DeletedWithWriteoff":
+        {
+            "filterType": "IncludeValues",
+            "values":["NOT_DELETED"]
+			
+        }
+
+
+    }
+ }
