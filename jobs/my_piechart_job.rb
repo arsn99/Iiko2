@@ -9,13 +9,13 @@ class Pie
 		@@DishDiscountSumIntPie.shift(@@DishDiscountSumIntPie.length)
 		# Типы оплат
 		data = $iiko.IikoPostRequestForSebesMounth("POSTforBUZZ.json","CURRENT_MONTH")
-		
+
 		#labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July','Aug']
 
 
 		data['data'].each do |iikos|
 			  @@pointsPie << { type:iikos['PayTypes'] , sum: iikos['DishDiscountSumInt'] }
-			  
+
 		end
 		@@pointsPie = @@pointsPie.sort_by { |h| -h[:sum]}
 
@@ -24,7 +24,7 @@ class Pie
                 @@DishDiscountSumIntPie<<i[:sum]
                 @@labelsPie<<i[:type]+" : "+ number_with_delimiter(i[:sum].round, delimiter: " ").to_s
             end
-			
+
 		end
 		dataMoreInfoSum =  number_with_delimiter(data['summary'][1][1]['DishDiscountSumInt'].round, delimiter: " ")
 		data = [
@@ -65,5 +65,5 @@ end
 pie = Pie.new
 SCHEDULER.every '15m', :first_in => 0 do |job|
 	pie.PieF()
-  
+
 end

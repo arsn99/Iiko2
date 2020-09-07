@@ -1,19 +1,19 @@
-require "Action_View"
+require "action_view"
 include ActionView::Helpers::NumberHelper
 
 class TopGrupp
 	@@pointsGrM
 	@@laGrM
-	
+
 	@@pointsBludM
 	@@laBludM
-	
+
 	@@pointsGrMPr
 	@@laGrMPr
-	
+
 	@@pointsGrMCount
 	@@laGrMCount
-	
+
 	#Топ по группам блюд
 	def UseTopGrupp()
 		dataGruppM = $iiko.IikoPostRequestForSebesMounth("PostPoGruppavBlud.json","CURRENT_MONTH")
@@ -36,16 +36,16 @@ class TopGrupp
 						nameS <<" "+name
 						next
 					end
-					
+
 					if name.length > 3
 						name=name.slice(0..2)+"."
 					end
 					nameS <<" "+name
 				end
-				@@pointsGrM << { sum:iikos['DishDiscountSumInt'] , type: nameS }	 
+				@@pointsGrM << { sum:iikos['DishDiscountSumInt'] , type: nameS }
                 sum+=iikos['DishDiscountSumInt']
 			  end
-	  
+
 		end
 
 		@@pointsGrM = @@pointsGrM.sort_by { |h| -h[:sum]}
@@ -56,12 +56,12 @@ class TopGrupp
 			end
 			str = number_with_delimiter(i[:sum].round, delimiter: " ").to_s
 			@@laGrM<<{label:(k+1).to_s+". "+i[:type],value:str}
-			
+
 		end
 		sum = number_with_delimiter(sum.round, delimiter: " ")
         send_event('TopGruppM', { items: @@laGrM ,moreinfo:Date.today.strftime("%B"),sum:sum})
 		#Топ по группам блюд %%%%
-        
+
 		dataGruppMPrecent = $iiko.IikoPostRequestForSebesMounth("PostPoGruppavBlud%.json","CURRENT_MONTH")
 		@@pointsGrMPr= []
 		@@laGrMPr = []
@@ -71,7 +71,7 @@ class TopGrupp
                 next
               end
 			  if iikos['DishGroup'].length < 20
-				@@pointsGrMPr << { sum:(iikos['ProductCostBase.Percent']*100).round(2) , type: iikos['DishGroup'] }	
+				@@pointsGrMPr << { sum:(iikos['ProductCostBase.Percent']*100).round(2) , type: iikos['DishGroup'] }
 			  else
 				nameS = ""
 				lengthS = iikos['DishGroup'].split(" ").length
@@ -86,8 +86,8 @@ class TopGrupp
 					end
 					nameS <<" "+name
 				end
-				@@pointsGrMPr << { sum:iikos['ProductCostBase.Percent'] , type: nameS }	 
-			  
+				@@pointsGrMPr << { sum:iikos['ProductCostBase.Percent'] , type: nameS }
+
 			  end
 		end
 
@@ -99,7 +99,7 @@ class TopGrupp
 			end
 			str = number_with_delimiter(i[:sum].round, delimiter: " ").to_s
 			@@laGrMPr<<{label:(k+1).to_s+". "+i[:type],value:str}
-			
+
 		end
 		send_event('TopGruppMPrecent', { items: @@laGrMPr ,moreinfo:Date.today.strftime("%B")})
 		#Топ по группам блюд Count
@@ -129,11 +129,11 @@ class TopGrupp
 					nameS <<" "+name
 				end
 				@@pointsGrMCount << { sum:iikos['DishAmountInt'] , type: nameS }
-                sum+=iikos['DishAmountInt']                
-			  
-			  end 
+                sum+=iikos['DishAmountInt']
+
+			  end
 		end
-		
+
 		@@pointsGrMCount = @@pointsGrMCount.sort_by { |h| -h[:sum]}
 		@@laGrMCount<<{label:"Блюда",value:"Кол."}
 		@@pointsGrMCount.each_with_index do |i,k|
@@ -142,7 +142,7 @@ class TopGrupp
 			end
 			str = number_with_delimiter(i[:sum].round, delimiter: " ").to_s
 			@@laGrMCount<<{label:(k+1).to_s+". "+i[:type],value:str}
-			
+
 		end
         sum = number_with_delimiter(sum.round, delimiter: " ")
         send_event('TopGruppMCount', { items: @@laGrMCount ,moreinfo:Date.today.strftime("%B"),sum:sum})
@@ -157,7 +157,7 @@ class TopGrupp
                 next
             end
 			  if iikos['DishName'].length < 20
-				@@pointsBludM << { sum:iikos['DishAmountInt'] , type: iikos['DishName'] }	
+				@@pointsBludM << { sum:iikos['DishAmountInt'] , type: iikos['DishName'] }
                 sum+=iikos['DishAmountInt']
 			  else
 				nameS = ""
@@ -167,7 +167,7 @@ class TopGrupp
 					if k==lengthS-1
 						next
 					end
-					if k==0 
+					if k==0
 						nameS <<" "+name
 						next
 					end
@@ -176,25 +176,25 @@ class TopGrupp
 					end
 					nameS <<" "+name
 				end
-				@@pointsBludM << { sum:iikos['DishAmountInt'] , type: nameS }	 
+				@@pointsBludM << { sum:iikos['DishAmountInt'] , type: nameS }
                 sum+=iikos['DishAmountInt']
-			  
+
 			  end
 		end
 		@@pointsBludM = @@pointsBludM.sort_by { |h| -h[:sum]}
 		@@laBludM<<{label:"Блюда",value:"Кол."}
 		@@pointsBludM.each_with_index do |i,k|
- 
+
 			if k>19
 				break
 			end
 			str = number_with_delimiter(i[:sum].round, delimiter: " ").to_s
 			@@laBludM<<{label:(k+1).to_s+". "+i[:type],value:str}
-			
+
 		end
         sum = number_with_delimiter(sum.round, delimiter: " ")
 		send_event('TopBludM', { items:@@laBludM ,moreinfo:Date.today.strftime("%B"),sum:sum})
-        	
+
 	end
 end
 
