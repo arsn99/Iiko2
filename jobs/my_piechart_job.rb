@@ -8,7 +8,8 @@ class Pie
 		@@labelsPie.shift(@@labelsPie.length)
 		@@DishDiscountSumIntPie.shift(@@DishDiscountSumIntPie.length)
 		# Типы оплат
-		data = $iiko.IikoPostRequestForSebesMounth("POSTforBUZZ.json","CURRENT_MONTH")
+        data = $iiko.IikoPostRequestSTR(groupByColFields: ["PayTypes"],aggregateFields: ["UniqOrderId","DishDiscountSumInt"], str: "CURRENT_MONTH")
+		#data = $iiko.IikoPostRequestForSebesMounth("POSTforBUZZ.json","CURRENT_MONTH")
 
 		#labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July','Aug']
 
@@ -19,14 +20,19 @@ class Pie
 		end
 		@@pointsPie = @@pointsPie.sort_by { |h| -h[:sum]}
 
+		dataMoreInfoSum = 0
+
 		@@pointsPie.each do |i|
             if i[:sum] != 0
+            	dataMoreInfoSum+=i[:sum]
                 @@DishDiscountSumIntPie<<i[:sum]
                 @@labelsPie<<i[:type]+" : "+ number_with_delimiter(i[:sum].round, delimiter: " ").to_s
             end
 
 		end
-		dataMoreInfoSum =  number_with_delimiter(data['summary'][1][1]['DishDiscountSumInt'].round, delimiter: " ")
+		dataMoreInfoSum =  number_with_delimiter(dataMoreInfoSum.round, delimiter: " ")
+
+		puts data
 		data = [
 			{
 			  # Create a random set of data for the chart

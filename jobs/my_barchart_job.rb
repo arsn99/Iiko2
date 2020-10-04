@@ -18,7 +18,7 @@ class Bar
     @@labelsBarSum2 = []
     @@DishDiscountSumIntsSum2 = []
 
-	@@pointsSebesSum= []
+	  @@pointsSebesSum= []
     @@labelsBarSebesSum = []
     @@SebesSum = []
 
@@ -30,10 +30,14 @@ class Bar
         @@labelsBarSebesSum.shift(@@labelsBarSebesSum.length)
         @@SebesSum.shift(@@SebesSum.length)
 
-        data = $iiko.IikoPostRequestForSebesMounth("PostForSebes%.json","CURRENT_MONTH")
+        filterDeleted = {"DeletedWithWriteoff" => {"filterType"=> "IncludeValues",
+                                           "values"=>["NOT_DELETED"]  } }
+
+        data = $iiko.IikoPostRequestSTR(groupByColFields: ["OpenDate.Typed"],aggregateFields: ["ProductCostBase.Percent"], str: "CURRENT_MONTH",filters: filterDeleted)
+        #data = $iiko.IikoPostRequestForSebesMounth("PostForSebes%.json","CURRENT_MONTH")
         prev = ""
         sum = 0
-		countDay = 0
+	     	countDay = 0
         data['data'].each do |iikos|
 
               if prev == ""
@@ -69,7 +73,7 @@ class Bar
             @@labelsBarSebesSum<<i[:x]
         end
 
-		data = [
+		   data = [
             {
               label: 'Себест %',
               data: @@pointsSebesSum,
@@ -89,7 +93,8 @@ class Bar
         @@labelsBarSum2.shift(@@labelsBarSum2.length)
         @@DishDiscountSumIntsSum2.shift(@@DishDiscountSumIntsSum2.length)
         #ПЕРВАЯ ЧАСТЬ
-        data = $iiko.IikoPostRequestForSebesMounth("POST.json","LAST_MONTH")
+        data = $iiko.IikoPostRequestSTR(groupByColFields: ["OpenDate.Typed"],aggregateFields: ["DishDiscountSumInt"], str: "LAST_MONTH")
+        #data = $iiko.IikoPostRequestForSebesMounth("POST.json","LAST_MONTH")
         prev = ""
         sumLast=0
         sumCurrent=0
@@ -124,7 +129,8 @@ class Bar
             @@labelsBarSum<<i[:x]
         end
         #ВТОРАЯ ЧАСТЬ
-        data = $iiko.IikoPostRequestForSebesMounth("POST.json","CURRENT_MONTH")
+        data = $iiko.IikoPostRequestSTR(groupByColFields: ["OpenDate.Typed"],aggregateFields: ["DishDiscountSumInt"], str: "CURRENT_MONTH")
+        #data = $iiko.IikoPostRequestForSebesMounth("POST.json","CURRENT_MONTH")
         prev = ""
 
         data['data'].each do |iikos|
@@ -182,7 +188,10 @@ class Bar
         @@points.shift(@@points.length)
         @@labelsBar.shift(@@labelsBar.length)
         @@DishDiscountSumInts.shift(@@DishDiscountSumInts.length)
-        data = $iiko.IikoPostRequest("POST.json")
+
+        data = $iiko.IikoPostRequestSTR(groupByColFields: ["OpenDate.Typed"],aggregateFields: ["DishDiscountSumInt"], str: "CUSTOM_MONTH")
+        
+        #data = $iiko.IikoPostRequest("POST.json")
         prev = ""
         data['data'].each do |iikos|
 
@@ -229,7 +238,8 @@ class Bar
         @@labelsBarSr.shift(@@labelsBarSr.length)
         @@DishDiscountSumIntsSr.shift(@@DishDiscountSumIntsSr.length)
 
-        data = $iiko.IikoPostRequest("SrCheck.json")
+        data = $iiko.IikoPostRequestSTR(groupByColFields: ["OpenDate.Typed"],aggregateFields: ["DishDiscountSumInt.average"], str: "CUSTOM_MONTH")
+        #data = $iiko.IikoPostRequest("SrCheck.json")
         prev = ""
         data['data'].each do |iikos|
 
@@ -273,6 +283,6 @@ end
 
 bar = Bar.new
 
-SCHEDULER.every '15m', :first_in => 0 do |job|
+SCHEDULER.every '15m', :first_in => 5 do |job|
   bar.UseBar()
 end

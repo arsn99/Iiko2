@@ -7,7 +7,7 @@
 	puts "Токен не получен."
 	$iiko.Finalize()
  end
- 
+
  SCHEDULER.every '300s', :first_in => '20s' do |job|
 	#$iiko.CheckToken()
 	$iiko.Finalize()
